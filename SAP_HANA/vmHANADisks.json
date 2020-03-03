@@ -1,0 +1,1113 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VM_NAME": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "SAP HANA VMs name"
+            }
+        },
+        "SKU": {
+            "type": "string",
+            "allowedValues": [
+                "M32ts",
+                "M32ls",
+                "M64ls",
+                "M64s",
+                "M64ms",
+                "M128s",
+                "M128ms",
+                "M208s_v2",
+                "M208ms_v2",
+                "M416s_v2",
+                "M416ms_v2"
+            ],
+            "defaultValue": "M32ts",
+            "metadata": {
+                "description": "SAP HANA certificated VMs"
+            }
+        }
+    },
+     "variables": {
+        "PremiumStorage": {
+            "P1": 3,
+            "P2": 7,
+            "P3": 15,
+            "P4": 31,
+            "P6": 63,
+            "P10": 127,
+            "P15": 255,
+            "P20": 511,
+            "P30": 1023,
+            "P40": 2048,
+            "P50": 4095,
+            "P60": 8191,
+            "P70": 16383,
+            "P80": 32767
+        },
+        "SKU_Disks": [ 
+        {
+            "M32ts": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/3",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/3",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/3",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/shared",
+                    "lun": 7,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/backup",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                }
+            ],
+            "M32ls": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/3",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/3",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/3",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/shared",
+                    "lun": 7,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/backup",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                }
+            ],
+            "M64ls": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/3",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/3",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/3",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/shared",
+                    "lun": 7,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/backup",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                }
+            ],
+            "M64s": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/4",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/4",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/4",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/data 4/4",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 7,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/shared",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "comments": "/hana/backup 1/2",
+                    "lun": 9,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "comments": "/hana/backup 2/2",
+                    "lun": 10,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                }
+            ],
+            "M64ms": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/3",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/3",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/3",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/shared",
+                    "lun": 7,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/backup 1/3",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "comments": "/hana/backup 2/3",
+                    "lun": 9,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "comments": "/hana/backup 3/3",
+                    "lun": 10,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                }
+            ],
+            "M128s": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P10]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/3",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/3",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/3",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/shared",
+                    "lun": 7,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/backup 1/2",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "comments": "/hana/backup 2/2",
+                    "lun": 9,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                }
+            ],
+             "M128ms": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P10]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/5",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/5",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/5",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/data 4/5",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/data 5/5",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 7,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 8,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "comments": "/hana/shared",
+                    "lun": 9,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "comments": "/hana/backup 1/4",
+                    "lun": 10,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "comments": "/hana/backup 2/4",
+                    "lun": 11,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                           {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 12)]",
+                    "comments": "/hana/backup 3/4",
+                    "lun": 12,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                           {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 13)]",
+                    "comments": "/hana/backup 4/4",
+                    "lun": 13,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                }
+            ],
+            "M208s_v2": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P10]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/4",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/4",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/4",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/data 4/4",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 7,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/shared",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "comments": "/hana/backup 1/3",
+                    "lun": 9,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "comments": "/hana/backup 2/3",
+                    "lun": 10,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "comments": "/hana/backup 3/3",
+                    "lun": 11,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                }
+            ],
+            "M208ms_v2": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P10]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/4",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/4",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/4",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/data 4/4",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 7,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/shared",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "comments": "/hana/backup 1/3",
+                    "lun": 9,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "comments": "/hana/backup 2/3",
+                    "lun": 10,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "comments": "/hana/backup 3/3",
+                    "lun": 11,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                }
+            ],
+            "M416s_v2": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P10]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/4",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/4",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/4",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/data 4/4",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 7,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/shared",
+                    "lun": 8,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "comments": "/hana/backup 1/3",
+                    "lun": 9,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "comments": "/hana/backup 2/3",
+                    "lun": 10,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "comments": "/hana/backup 3/3",
+                    "lun": 11,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                }
+            ],
+            "M416ms_v2": [
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "comments": "/root volume",
+                    "lun": 0,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P10]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "comments": "/usr/sap",
+                    "lun": 1,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P6]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "comments": "/hana/data 1/8",
+                    "lun": 2,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "comments": "/hana/data 2/8",
+                    "lun": 3,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "comments": "/hana/data 3/8",
+                    "lun": 4,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "comments": "/hana/data 4/8",
+                    "lun": 5,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "comments": "/hana/data 5/8",
+                    "lun": 6,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "comments": "/hana/data 6/8",
+                    "lun": 7,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "comments": "/hana/data 7/8",
+                    "lun": 8,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "comments": "/hana/data 8/8",
+                    "lun": 9,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P40]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "comments": "/hana/log 1/2",
+                    "lun": 10,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "comments": "/hana/log 2/2",
+                    "lun": 11,
+                    "caching": "None",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P20]",
+                    "writeAcceleratorEnabled": "true"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 12)]",
+                    "comments": "/hana/shared",
+                    "lun": 12,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P30]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 13)]",
+                    "comments": "/hana/backup 1/4",
+                    "lun": 13,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 14)]",
+                    "comments": "/hana/backup 2/4",
+                    "lun": 14,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 15)]",
+                    "comments": "/hana/backup 3/4",
+                    "lun": 15,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                },
+                {
+                    "name": "[concat('DataDisk', parameters('VM_NAME'), 16)]",
+                    "comments": "/hana/backup 4/4",
+                    "lun": 16,
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": "[variables('PremiumStorage').P50]"
+                }
+            ]
+        }]
+     },
+     "resources": [],
+     "outputs": {
+        "disks": {
+            "value": "[variables('SKU_Disks')[parameters('SKU')]]",
+            "type": "array"
+        }
+    }
+}
