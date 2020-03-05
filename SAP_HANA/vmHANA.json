@@ -20,15 +20,24 @@
         },
         "VirtualMachine APP Count": {
             "defaultValue": 1,
-            "type": "int"
+            "type": "int",
+            "metadata": {
+                "description": "Number of the SAP APP Servers"
+            }
         },
         "VirtualMachine APP Name": {
             "defaultValue": "vmNameAPP",
-            "type": "String"
+            "type": "String",
+            "metadata": {
+                "description": "If SAP APP Server count > 1 the virtual machine APP server name will have an count index on the end (e.g. APP_NAME01)"
+            }
         },
         "VirtualMachine APP SKU": {
             "defaultValue": "vmSKUAPPName",
-            "type": "String"
+            "type": "String",
+            "metadata": {
+                "description": "SAP APP Server certificated VMs"
+            }
         },
         "VirtualMachine HANA Name": {
             "defaultValue": "vmNameDB",
@@ -214,7 +223,17 @@
                         },
                         "diskSizeGB": 127
                     },
-                    "dataDisks": "[reference('linkedTemplate').outputs.disks.value]"
+                    "copy": {
+                        "name": "dataDisks",
+                        "count": "[reference('linkedTemplate').outputs.disks.value.count]",
+                        "input" : {
+                            "name": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].name]",
+                            "comments": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].comments]",
+                            "lun": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].lun]",
+                            "caching": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].caching]",
+                            "createOption": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].createOption]",
+                            "diskSizeGB": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].diskSizeGB]"
+                        }
                 },
                 "osProfile": {
                     "computerName": "[parameters('VirtualMachine HANA Name')]",
