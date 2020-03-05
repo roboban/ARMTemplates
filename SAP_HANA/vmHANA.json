@@ -157,7 +157,9 @@
                 "primary": true,
                 "tapConfigurations": []
             },
-            "dependsOn": []
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('SubnetName_Name'))]"
+            ]
         },
 
         {
@@ -244,7 +246,9 @@
                 "primary": true,
                 "tapConfigurations": []
             },
-            "dependsOn": []
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('SubnetName_Name'))]"
+            ]
         },
         {
             "comments": "Only if the demo mode is selected",
