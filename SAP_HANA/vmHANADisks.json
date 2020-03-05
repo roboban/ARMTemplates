@@ -47,7 +47,7 @@
             "P70": 16383,
             "P80": 32767
         },
-        "SKU_Disks": [ 
+        "SKU_Disks": 
         {
             "M32ts": [
                 {
@@ -1101,7 +1101,7 @@
                     "diskSizeGB": "[variables('PremiumStorage').P50]"
                 }
             ]
-        }]
+        }
      },
      "resources": [],
      "outputs": {
