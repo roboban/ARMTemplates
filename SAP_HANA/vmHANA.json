@@ -225,14 +225,14 @@
                     },
                     "copy": {
                         "name": "dataDisks",
-                        "count": "[reference('linkedTemplate').outputs.disks.value.count]",
+                        "count": "[reference('linkedTemplate').outputs.disks.count]",
                         "input" : {
-                            "name": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].name]",
-                            "comments": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].comments]",
-                            "lun": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].lun]",
-                            "caching": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].caching]",
-                            "createOption": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].createOption]",
-                            "diskSizeGB": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].diskSizeGB]"
+                            "name": "[reference('linkedTemplate').outputs.disks[copyIndex()].name]",
+                            "comments": "[reference('linkedTemplate').outputs.disks[copyIndex()].comments]",
+                            "lun": "[reference('linkedTemplate').outputs.disks[copyIndex()].lun]",
+                            "caching": "[reference('linkedTemplate').outputs.disks[copyIndex()].caching]",
+                            "createOption": "[reference('linkedTemplate').outputs.disks[copyIndex()].createOption]",
+                            "diskSizeGB": "[reference('linkedTemplate').outputs.disks[copyIndex()].diskSizeGB]"
                         }
                     }
                 },
