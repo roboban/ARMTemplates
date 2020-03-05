@@ -126,11 +126,15 @@
         {
             "comments": "SAP APP Server NIC",
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex(),2,'0'))]",
+            "name": "[concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex('nicAppCopy'),2,'0'))]",
             "apiVersion": "2018-10-01",
             "location": "[variables('Location')]",
             "tags": {},
             "scale": null,
+            "copy": {
+                "name": "nicAppCopy",
+                "count": "[parameters('VirtualMachine_APP_Count')]"
+            },
             "properties": {
                 "provisioningState": "Succeeded",
                 "ipConfigurations": [
