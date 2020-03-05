@@ -33,8 +33,42 @@
             }
         },
         "VirtualMachine APP SKU": {
-            "defaultValue": "vmSKUAPPName",
             "type": "String",
+            "allowedValues": [
+                "Standard_D2s_v3",
+                "Standard_D4s_v3",
+                "Standard_D8s_v3",
+                "Standard_D16s_v3",
+                "Standard_D32s_v3",
+                "Standard_D48s_v3",
+                "Standard_D64s_v3",
+                "Standard_D2as_v4",
+                "Standard_D4as_v4",
+                "Standard_D8as_v4",
+                "Standard_D16as_v4",
+                "Standard_D32as_v4",
+                "Standard_D48as_v4",
+                "Standard_D64as_v4",
+                "Standard_E2s_v3",
+                "Standard_E4s_v3",
+                "Standard_E8-4s_v3",
+                "Standard_E8s_v3",
+                "Standard_E16s_v3",
+                "Standard_E20s_v3",
+                "Standard_E32s_v3",
+                "Standard_E48s_v3",
+                "Standard_E64is_v3",
+                "Standard_E64s_v3",
+                "Standard_E2as_v4",
+                "Standard_E4as_v4",
+                "Standard_E8as_v4",
+                "Standard_E16as_v4",
+                "Standard_E20as_v4",
+                "Standard_E32as_v4",
+                "Standard_E48as_v4",
+                "Standard_E64as_v4"
+            ],
+            "defaultValue": "Standard_D2s_v3",
             "metadata": {
                 "description": "SAP APP Server certificated VMs"
             }
