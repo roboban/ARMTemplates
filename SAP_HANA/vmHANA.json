@@ -234,6 +234,7 @@
                             "createOption": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].createOption]",
                             "diskSizeGB": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].diskSizeGB]"
                         }
+                    }
                 },
                 "osProfile": {
                     "computerName": "[parameters('VirtualMachine HANA Name')]",
