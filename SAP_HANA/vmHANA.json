@@ -261,7 +261,7 @@
         },
         {
             "comments": "Only if the demo mode is selected",
-            "condition": "[equals(parameters('IsDemo'), 'True')]",
+            "condition": "[equals(parameters('IsDemo'), 'Yes')]",
             "type": "Microsoft.Network/virtualNetworks",
             "name": "[parameters('virtualNetwork_name')]",
             "apiVersion": "2018-10-01",
@@ -289,7 +289,7 @@
         },
         {
             "comments": "Only if the demo mode is selected",
-            "condition": "[equals(parameters('IsDemo'), 'True')]",
+            "condition": "[equals(parameters('IsDemo'), 'Yes')]",
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "name": "[concat(parameters('VirtualNetwork_Name'), '/', parameters('SubnetName_Name'))]",
             "apiVersion": "2018-10-01",
