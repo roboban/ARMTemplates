@@ -228,7 +228,6 @@
                         "count": 9,
                         "input" : {
                             "name": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].name]",
-                            "comments": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].comments]",
                             "lun": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].lun]",
                             "caching": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].caching]",
                             "createOption": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].createOption]",
