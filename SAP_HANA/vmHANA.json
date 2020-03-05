@@ -84,8 +84,8 @@
             "apiVersion": "2017-05-10",
             "properties": {
               "mode": "Incremental",
-              "templateLink": {
-                "uri": "[uri(deployment().properties.templateLink.uri, 'vmHANADisks.json')]",
+              "template": {
+                "uri": "[uri(deployment().properties.template.uri, 'vmHANADisks.json')]",
                 "contentVersion": "1.0.0.0"
               },
               "parameters":
