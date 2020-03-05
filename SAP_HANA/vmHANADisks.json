@@ -1107,7 +1107,7 @@
      "outputs": {
         "disks": {
             "value": "[variables('SKU_Disks')[parameters('SKU')]]",
-            "type": "object"
+            "type": "array"
         }
     }
 }

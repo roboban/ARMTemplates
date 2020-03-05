@@ -198,7 +198,7 @@
                         },
                         "diskSizeGB": 127
                     },
-                    "dataDisks": ["[reference('linkedTemplate').outputs.disks.value]"]
+                    "dataDisks": ["[reference('linkedTemplate').outputs.disks]"]
                 },
                 "osProfile": {
                     "computerName": "[parameters('VirtualMachine_DB')]",
