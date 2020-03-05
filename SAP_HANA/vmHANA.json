@@ -4,7 +4,11 @@
     "parameters": {
         "IsDemo": {
             "defaultValue": "No",
-            "type": "Bool"
+            "type": "String",
+            "allowedValues": [
+                "Yes",
+                "No"
+            ]
         },
         "UserName": {
             "defaultValue": "userName",
