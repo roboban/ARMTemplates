@@ -78,7 +78,7 @@
         {
             "comments": "SAP APP Server",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[concat(parameters('VirtualMachine_APP'), padLeft(copyindex(),2,'0'))]",
+            "name": "[concat(parameters('VirtualMachine_APP'), copyindex())]",
             "apiVersion": "2018-06-01",
             "location": "[parameters('Location')]",
             "copy": {
@@ -109,7 +109,7 @@
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName":  "[concat(parameters('VirtualMachine_APP'), padLeft(copyindex(),2,'0'))]",
+                    "computerName":  "[concat(parameters('VirtualMachine_APP'), copyindex())]",
                     "adminUsername": "[parameters('UserName')]",
                     "adminPassword": "[parameters('UserPassword')]",
                     "windowsConfiguration": {
@@ -122,14 +122,14 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex(),2,'0')))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), copyindex()))]"
                         }
                     ]
                 },
                 "licenseType": "Windows_Server"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex(),2,'0')))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), copyindex()))]"
             ]
         },
         {
