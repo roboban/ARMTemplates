@@ -126,7 +126,7 @@
         {
             "comments": "SAP APP Server NIC",
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[variables('NetworkInterfaces_VM_APP')]",
+            "name": "[concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex(),2,'0'))]",
             "apiVersion": "2018-10-01",
             "location": "[variables('Location')]",
             "tags": {},
