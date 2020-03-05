@@ -78,12 +78,12 @@
         {
             "comments": "SAP APP Server",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[concat(parameters('VirtualMachine_APP'), copyindex())]",
+            "name": "[concat(parameters('VirtualMachine_APP'), padLeft(copyindex(),2,'0'))]",
             "apiVersion": "2018-06-01",
             "location": "[parameters('Location')]",
             "copy": {
                 "name": "vmAppCopy",
-                "count": "[length(parameters('VirtualMachine_APP_Count'))]"
+                "count": "[parameters('VirtualMachine_APP_Count')]"
             },
             "properties": {
                 "hardwareProfile": {
@@ -109,7 +109,7 @@
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName":  "[concat(parameters('VirtualMachine_APP'), copyindex())]",
+                    "computerName":  "[concat(parameters('VirtualMachine_APP'), padLeft(copyindex(),2,'0'))]",
                     "adminUsername": "[parameters('UserName')]",
                     "adminPassword": "[parameters('UserPassword')]",
                     "windowsConfiguration": {
@@ -122,14 +122,14 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), copyindex()))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex(),2,'0')))]"
                         }
                     ]
                 },
                 "licenseType": "Windows_Server"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), copyindex()))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex(),2,'0')))]"
             ]
         },
         {
