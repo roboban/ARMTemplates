@@ -47,46 +47,55 @@
             "P70": 16383,
             "P80": 32767
         },
+        "DiskUsageTypes" :
+        {
+            "ROOT": "_root_",
+            "SAP": "_user_sap_",
+            "DATA": "_hana_data_",
+            "LOG": "_hana_log_",
+            "SHARED": "_hana_shared_",
+            "BACKUP": "_hana_backup_"
+        },
         "SKU_Disks": 
         {
             "Standard_M32ts": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
@@ -94,7 +103,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -102,14 +111,14 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -118,42 +127,42 @@
             ],
             "Standard_M32ls": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
@@ -161,7 +170,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -169,14 +178,14 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -185,42 +194,42 @@
             ],
             "Standard_M64ls": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
@@ -228,7 +237,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -236,14 +245,14 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -252,49 +261,49 @@
             ],
             "Standard_M64s": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P20]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -302,7 +311,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "None",
                     "createOption": "Empty",
@@ -310,21 +319,21 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 9)]",
                     "lun": 9,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 10)]",
                     "lun": 10,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -333,42 +342,42 @@
             ],
             "Standard_M64ms": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
@@ -376,7 +385,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -384,28 +393,28 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 9)]",
                     "lun": 9,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 10)]",
                     "lun": 10,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -414,42 +423,42 @@
             ],
             "Standard_M128s": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P10]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
@@ -457,7 +466,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -465,21 +474,21 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 9)]",
                     "lun": 9,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -488,56 +497,56 @@
             ],
              "Standard_M128ms": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P10]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "None",
                     "createOption": "Empty",
@@ -545,7 +554,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "None",
                     "createOption": "Empty",
@@ -553,35 +562,35 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 9)]",
                     "lun": 9,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 10)]",
                     "lun": 10,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 11)]",
                     "lun": 11,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                            {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 12)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 12)]",
                     "lun": 12,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                            {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 13)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 13)]",
                     "lun": 13,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -590,49 +599,49 @@
             ],
             "Standard_M208s_v2": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P10]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -640,7 +649,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "None",
                     "createOption": "Empty",
@@ -648,28 +657,28 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 9)]",
                     "lun": 9,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 10)]",
                     "lun": 10,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 11)]",
                     "lun": 11,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -678,49 +687,49 @@
             ],
             "Standard_M208ms_v2": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P10]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -728,7 +737,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "None",
                     "createOption": "Empty",
@@ -736,28 +745,28 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 9)]",
                     "lun": 9,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P50]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 10)]",
                     "lun": 10,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P50]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 11)]",
                     "lun": 11,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -766,49 +775,49 @@
             ],
             "Standard_M416s_v2": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P10]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
@@ -816,7 +825,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "None",
                     "createOption": "Empty",
@@ -824,28 +833,28 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 9)]",
                     "lun": 9,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P50]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 10)]",
                     "lun": 10,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P50]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 11)]",
                     "lun": 11,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
@@ -854,77 +863,77 @@
             ],
             "Standard_M416ms_v2": [
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 0)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').ROOT, parameters('VM_NAME'), 0)]",
                     "lun": 0,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P10]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 1)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SAP, parameters('VM_NAME'), 1)]",
                     "lun": 1,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P6]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 2)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 2)]",
                     "lun": 2,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 3)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 3)]",
                     "lun": 3,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 4)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 4)]",
                     "lun": 4,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 5)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 5)]",
                     "lun": 5,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 6)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 6)]",
                     "lun": 6,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 7)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 7)]",
                     "lun": 7,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 8)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 8)]",
                     "lun": 8,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 9)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').DATA, parameters('VM_NAME'), 9)]",
                     "lun": 9,
                     "caching": "None",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P40]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 10)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 10)]",
                     "lun": 10,
                     "caching": "None",
                     "createOption": "Empty",
@@ -932,7 +941,7 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 11)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').LOG, parameters('VM_NAME'), 11)]",
                     "lun": 11,
                     "caching": "None",
                     "createOption": "Empty",
@@ -940,35 +949,35 @@
                     "writeAcceleratorEnabled": "true"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 12)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').SHARED, parameters('VM_NAME'), 12)]",
                     "lun": 12,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P30]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 13)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 13)]",
                     "lun": 13,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P50]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 14)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 14)]",
                     "lun": 14,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P50]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 15)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 15)]",
                     "lun": 15,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
                     "diskSizeGB": "[variables('PremiumStorage').P50]"
                 },
                 {
-                    "name": "[concat('DataDisk', parameters('VM_NAME'), 16)]",
+                    "name": "[concat('DataDisk', variables('DiskUsageTypes').BACKUP, parameters('VM_NAME'), 16)]",
                     "lun": 16,
                     "caching": "ReadOnly",
                     "createOption": "Empty",
