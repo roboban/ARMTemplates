@@ -223,18 +223,18 @@
                         },
                         "diskSizeGB": 127
                     },
-                    "copy": {
+                    "copy": [{
                         "name": "dataDisks",
                         "count": "9",
                         "input" : {
-                            "name": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].name]",
-                            "comments": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].comments]",
-                            "lun": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].lun]",
-                            "caching": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].caching]",
-                            "createOption": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].createOption]",
-                            "diskSizeGB": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].diskSizeGB]"
+                            "name": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].name]",
+                            "comments": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].comments]",
+                            "lun": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].lun]",
+                            "caching": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].caching]",
+                            "createOption": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].createOption]",
+                            "diskSizeGB": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].diskSizeGB]"
                         }
-                    }
+                    }]
                 },
                 "osProfile": {
                     "computerName": "[parameters('VirtualMachine HANA Name')]",
