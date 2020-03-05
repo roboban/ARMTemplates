@@ -225,7 +225,7 @@
                     },
                     "copy": {
                         "name": "dataDisks",
-                        "count": "[reference('linkedTemplate').outputs.disks.value.count]",
+                        "count": "9",
                         "input" : {
                             "name": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].name]",
                             "comments": "[reference('linkedTemplate').outputs.disks.value[copyIndex()].comments]",
