@@ -51,7 +51,7 @@
     },
     "variables": {
         "NetworkInterfaces_VM_APP": {
-            "nicName": "[concat('nic', parameters('VirtualMachine_APP'),'-', 'app', padLeft(copyindex('vmAppCopy'),2,'0'))]"
+            "nicName": "[concat('nic', parameters('VirtualMachine_APP'),'-', 'app')]"
         },
         "NetworkInterfaces_VM_DB": {
             "nicName": "[concat('nic', parameters('VirtualMachine_DB'),'-', 'db')]"
@@ -122,14 +122,14 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('NetworkInterfaces_VM_APP'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex(),2,'0')))]"
                         }
                     ]
                 },
                 "licenseType": "Windows_Server"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', variables('NetworkInterfaces_VM_APP'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('NetworkInterfaces_VM_APP'), padLeft(copyindex(),2,'0')))]"
             ]
         },
         {
