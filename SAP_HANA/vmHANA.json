@@ -225,7 +225,7 @@
                     },
                     "copy": [{
                         "name": "dataDisks",
-                        "count": "9",
+                        "count": 9,
                         "input" : {
                             "name": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].name]",
                             "comments": "[reference('linkedTemplate').outputs.disks.value[copyIndex('dataDisks')].comments]",
