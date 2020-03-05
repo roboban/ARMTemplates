@@ -46,17 +46,17 @@
         "VirtualMachine HANA SKU": {
             "type": "String",
             "allowedValues": [
-                "M32ts",
-                "M32ls",
-                "M64ls",
-                "M64s",
-                "M64ms",
-                "M128s",
-                "M128ms",
-                "M208s_v2",
-                "M208ms_v2",
-                "M416s_v2",
-                "M416ms_v2"
+                "Standard_M32ts",
+                "Standard_M32ls",
+                "Standard_M64ls",
+                "Standard_M64s",
+                "Standard_M64ms",
+                "Standard_M128s",
+                "Standard_M128ms",
+                "Standard_M208s_v2",
+                "Standard_M208ms_v2",
+                "Standard_M416s_v2",
+                "Standard_M416ms_v2"
             ],
             "defaultValue": "M32ts",
             "metadata": {
