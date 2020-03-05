@@ -58,7 +58,7 @@
                 "Standard_M416s_v2",
                 "Standard_M416ms_v2"
             ],
-            "defaultValue": "M32ts",
+            "defaultValue": "Standard_M32ts",
             "metadata": {
                 "description": "SAP HANA certificated VMs"
             }
