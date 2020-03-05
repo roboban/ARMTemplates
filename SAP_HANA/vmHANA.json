@@ -140,7 +140,7 @@
             "location": "[variables('Location')]",
             "copy": {
                 "name": "vmAppCopy",
-                "count": "[parameters('VirtualMachine APP Count')]",
+                "count": "[parameters('VirtualMachine APP Count')]"
             },
             "properties": {
                 "hardwareProfile": {
