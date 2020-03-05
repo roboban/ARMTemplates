@@ -6,12 +6,6 @@
             "defaultValue": "No",
             "type": "Bool"
         },
-   	    "Location": {
-      	    "type": "string",
-      	    "defaultValue": "[resourceGroup().location]",
-      	    "metadata": {
-        	"description": "Location for all resources."}
-    	},
         "UserName": {
             "defaultValue": "userName",
             "type": "String"
@@ -50,12 +44,9 @@
         }
     },
     "variables": {
-        "NetworkInterfaces_VM_APP": {
-            "nicName": "[concat('nic', parameters('VirtualMachine_APP'),'-', 'app')]"
-        },
-        "NetworkInterfaces_VM_DB": {
-            "nicName": "[concat('nic', parameters('VirtualMachine_DB'),'-', 'db')]"
-        }
+        "NetworkInterfaces_VM_APP": "[concat('nic', parameters('VirtualMachine_APP'),'-', 'app')]",
+        "NetworkInterfaces_VM_DB": "[concat('nic', parameters('VirtualMachine_DB'),'-', 'db')]",
+        "Location" : "[resourceGroup().location]"
     },
     "resources": [
         {
@@ -80,7 +71,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[concat(parameters('VirtualMachine_APP'), padLeft(copyindex(),2,'0'))]",
             "apiVersion": "2018-06-01",
-            "location": "[parameters('Location')]",
+            "location": "[variables('Location')]",
             "copy": {
                 "name": "vmAppCopy",
                 "count": "[parameters('VirtualMachine_APP_Count')]"
@@ -137,7 +128,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "name": "[variables('NetworkInterfaces_VM_APP')]",
             "apiVersion": "2018-10-01",
-            "location": "[parameters('Location')]",
+            "location": "[variables('Location')]",
             "tags": {},
             "scale": null,
             "properties": {
@@ -170,7 +161,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[parameters('VirtualMachine_DB')]",
             "apiVersion": "2018-06-01",
-            "location": "[parameters('Location')]",
+            "location": "[variables('Location')]",
             "properties": {
                 "hardwareProfile": {
                     "vmSize": "[parameters('VirtualMachine_SKU_DB')]"
@@ -223,7 +214,7 @@
             "type": "Microsoft.Network/networkInterfaces",
             "name": "[variables('NetworkInterfaces_VM_DB')]",
             "apiVersion": "2018-10-01",
-            "location": "[parameters('Location')]",
+            "location": "[variables('Location')]",
             "tags": {},
             "scale": null,
             "properties": {
@@ -257,7 +248,7 @@
             "type": "Microsoft.Network/virtualNetworks",
             "name": "[parameters('virtualNetwork_name')]",
             "apiVersion": "2018-10-01",
-            "location": "[parameters('Location')]",
+            "location": "[variables('Location')]",
             "scale": null,
             "properties": {
                 "provisioningState": "Succeeded",
