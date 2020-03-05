@@ -18,38 +18,54 @@
             "defaultValue": "userName@001",
             "type": "String"
         },
-        "VirtualMachine_APP_Count": {
+        "VirtualMachine APP Count": {
             "defaultValue": 1,
             "type": "int"
         },
-        "VirtualMachine_APP": {
+        "VirtualMachine APP Name": {
             "defaultValue": "vmNameAPP",
             "type": "String"
         },
-        "VirtualMachine_SKU_APP": {
+        "VirtualMachine APP SKU": {
             "defaultValue": "vmSKUAPPName",
             "type": "String"
         },
-        "VirtualMachine_DB": {
+        "VirtualMachine HANA Name": {
             "defaultValue": "vmNameDB",
             "type": "String"
         },
-        "VirtualMachine_SKU_DB": {
-            "defaultValue": "vmSKUDBName",
-            "type": "String"
+        "VirtualMachine HANA SKU": {
+            "type": "String",
+            "allowedValues": [
+                "M32ts",
+                "M32ls",
+                "M64ls",
+                "M64s",
+                "M64ms",
+                "M128s",
+                "M128ms",
+                "M208s_v2",
+                "M208ms_v2",
+                "M416s_v2",
+                "M416ms_v2"
+            ],
+            "defaultValue": "M32ts",
+            "metadata": {
+                "description": "SAP HANA certificated VMs"
+            }
         },
-        "VirtualNetwork_Name": {
+        "VirtualNetwork Name": {
             "defaultValue": "vnetDemo",
             "type": "String"
         },
-        "SubnetName_Name": {
+        "SubnetName Name": {
             "defaultValue": "Default",
             "type": "String"
         }
     },
     "variables": {
-        "NetworkInterfaces_VM_APP": "[concat('nic', parameters('VirtualMachine_APP'),'-', 'app')]",
-        "NetworkInterfaces_VM_DB": "[concat('nic', parameters('VirtualMachine_DB'),'-', 'db')]",
+        "NetworkInterfaces_VM_APP": "[concat('nic', parameters('VirtualMachine APP Name'),'-', 'app')]",
+        "NetworkInterfaces_VM_DB": "[concat('nic', parameters('VirtualMachine HANA Name'),'-', 'db')]",
         "Location" : "[resourceGroup().location]"
     },
     "resources": [
@@ -65,8 +81,8 @@
               },
               "parameters":
                 {
-                    "VM_NAME":{"value": "[parameters('VirtualMachine_DB')]"},
-                    "SKU":{"value": "[parameters('VirtualMachine_SKU_DB')]"}
+                    "VM_NAME":{"value": "[parameters('VirtualMachine HANA Name')]"},
+                    "SKU":{"value": "[parameters('VirtualMachine HANA SKU')]"}
                 },
                 "debugSetting": {
                     "detailLevel": "requestContent, responseContent"
@@ -76,17 +92,17 @@
         {
             "comments": "SAP APP Server",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[concat(parameters('VirtualMachine_APP'), padLeft(copyindex(),2,'0'))]",
+            "name": "[concat(parameters('VirtualMachine APP Name'), padLeft(copyindex(),2,'0'))]",
             "apiVersion": "2018-06-01",
             "location": "[variables('Location')]",
             "copy": {
                 "name": "vmAppCopy",
-                "count": "[parameters('VirtualMachine_APP_Count')]",
+                "count": "[parameters('VirtualMachine APP Count')]",
                 "mode": "Serial"
             },
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[parameters('VirtualMachine_SKU_APP')]"
+                    "vmSize": "[parameters('VirtualMachine APP SKU')]"
                 },
                 "storageProfile": {
                     "imageReference": {
@@ -97,7 +113,7 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('VirtualMachine_APP'),'_OsDisk')]",
+                        "name": "[concat(parameters('VirtualMachine APP Name'),'_OsDisk')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -108,7 +124,7 @@
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName":  "[concat(parameters('VirtualMachine_APP'), padLeft(copyindex(),2,'0'))]",
+                    "computerName":  "[concat(parameters('VirtualMachine APP Name'), padLeft(copyindex(),2,'0'))]",
                     "adminUsername": "[parameters('UserName')]",
                     "adminPassword": "[parameters('UserPassword')]",
                     "windowsConfiguration": {
@@ -141,7 +157,7 @@
             "scale": null,
             "copy": {
                 "name": "nicAppCopy",
-                "count": "[parameters('VirtualMachine_APP_Count')]",
+                "count": "[parameters('VirtualMachine APP Count')]",
                 "mode": "Serial"
             },
             "properties": {
@@ -154,7 +170,7 @@
                             "privateIPAddress": "192.168.91.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('SubnetName_Name'))]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('VirtualNetwork Name'), parameters('SubnetName Name'))]"
                             },
                             "primary": true,
                             "privateIPAddressVersion": "IPv4"
@@ -167,19 +183,19 @@
                 "tapConfigurations": []
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('SubnetName_Name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('VirtualNetwork Name'), parameters('SubnetName Name'))]"
             ]
         },
 
         {
             "comments": "SAP DB Server",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[parameters('VirtualMachine_DB')]",
+            "name": "[parameters('VirtualMachine HANA Name')]",
             "apiVersion": "2018-06-01",
             "location": "[variables('Location')]",
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[parameters('VirtualMachine_SKU_DB')]"
+                    "vmSize": "[parameters('VirtualMachine HANA SKU')]"
                 },
                 "storageProfile": {
                     "imageReference": {
@@ -190,7 +206,7 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('VirtualMachine_DB'),'_OsDisk')]",
+                        "name": "[concat(parameters('VirtualMachine HANA Name'),'_OsDisk')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -201,7 +217,7 @@
                     "dataDisks": "[reference('linkedTemplate').outputs.disks.value]"
                 },
                 "osProfile": {
-                    "computerName": "[parameters('VirtualMachine_DB')]",
+                    "computerName": "[parameters('VirtualMachine HANA Name')]",
                     "adminUsername": "[parameters('UserName')]",
                     "adminPassword": "[parameters('UserPassword')]",
                     "windowsConfiguration": {
@@ -243,7 +259,7 @@
                             "privateIPAddress": "192.168.91.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('SubnetName_Name'))]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('VirtualNetwork Name'), parameters('SubnetName Name'))]"
                             },
                             "primary": true,
                             "privateIPAddressVersion": "IPv4"
@@ -256,14 +272,14 @@
                 "tapConfigurations": []
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetwork_name'), parameters('SubnetName_Name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('VirtualNetwork Name'), parameters('SubnetName Name'))]"
             ]
         },
         {
             "comments": "Only if the demo mode is selected",
             "condition": "[equals(parameters('IsDemo'), 'Yes')]",
             "type": "Microsoft.Network/virtualNetworks",
-            "name": "[parameters('virtualNetwork_name')]",
+            "name": "[parameters('VirtualNetwork Name')]",
             "apiVersion": "2018-10-01",
             "location": "[variables('Location')]",
             "scale": null,
@@ -291,7 +307,7 @@
             "comments": "Only if the demo mode is selected",
             "condition": "[equals(parameters('IsDemo'), 'Yes')]",
             "type": "Microsoft.Network/virtualNetworks/subnets",
-            "name": "[concat(parameters('VirtualNetwork_Name'), '/', parameters('SubnetName_Name'))]",
+            "name": "[concat(parameters('VirtualNetwork Name'), '/', parameters('SubnetName Name'))]",
             "apiVersion": "2018-10-01",
             "scale": null,
             "properties": {
@@ -300,7 +316,7 @@
                 "delegations": []
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('VirtualNetwork_Name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('VirtualNetwork Name'))]"
             ]
         }
     ]
