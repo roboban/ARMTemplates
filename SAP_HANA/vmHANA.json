@@ -161,7 +161,7 @@
                         }
                     }
                 ],
-                "enableAcceleratedNetworking": true,
+                "enableAcceleratedNetworking": false,
                 "enableIPForwarding": false,
                 "primary": true,
                 "tapConfigurations": []
@@ -250,7 +250,7 @@
                         }
                     }
                 ],
-                "enableAcceleratedNetworking": true,
+                "enableAcceleratedNetworking": false,
                 "enableIPForwarding": false,
                 "primary": true,
                 "tapConfigurations": []
