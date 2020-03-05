@@ -155,7 +155,7 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('VirtualMachine APP Name'),'_OsDisk_',padLeft(copyindex(),2,'0'))]",
+                        "name": "[concat(parameters('VirtualMachine APP Name'),'_OsDisk_', padLeft(copyindex(),2,'0'))]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
